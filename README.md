@@ -8,7 +8,7 @@ See Application in: [https://myreads-carloshenrique.herokuapp.com/](https://myre
 
 ### Installation
 
-⋅⋅*Steps
+#### Steps
 
 ```
 1.Clone this repo or Download it.

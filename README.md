@@ -2,13 +2,13 @@
  
 This is my the first project of  [Udacity React Nanodegree](https://www.udacity.com/course/react-nanodegree--nd019), for evaluation.
 
-This is a Web application created with ReactJS. This Project has been used: Props, states, components, JSX and JavaScript (ECMAScript) 6.
+This is a Web application created with ReactJS. This Project has been used: Props, states, components, React-router, JSX and JavaScript (ECMAScript) 6.
 
 See Application in: [https://myreads-carloshenrique.herokuapp.com/](https://myreads-carloshenrique.herokuapp.com/)
 
 ### Installation
 
-⋅⋅*Steps
+#### Steps
 
 ```
 1.Clone this repo or Download it.
@@ -22,7 +22,6 @@ or
 2.npm install
 3.npm start
 ```
-***
 
 ### Important
 

@@ -13,47 +13,57 @@ class SearchBooks extends Component{
   } 
 
   state = {
-      currentBooks:[],
       returnAPI: '',
-      books:[],
-      maxResults: 7
+      books:[]
     }
+
+getAllBooks = () => {
+    BooksAPI
+      .getAll()
+      .then((books) => this.setState({books}))
+  }
 
   searchBooks(listBooks) {
     BooksAPI.search(listBooks).then((listBook) => {
 
       if(listBook.error && listBook.error ==="empty query") {
-       this.setState({ currentBooks: [], returnAPI:'no' })
+       this.setState({ returnAPI:'no' })
 
-      } else {  
+      } else {
+        let newList = listBook.map((list) => { 
+          return BooksAPI.get(list.id).then((books) => {
+            return books
+          })
+        })
 
-        this.setState({ 
-          currentBooks: listBook, 
-          returnAPI:'ok' 
+        Promise.all(newList).then((shelfBook)=> {
+          this.setState({ 
+            books: shelfBook, 
+            returnAPI:'ok' 
+          })
         })
        }
     })
   }
 
   submitQuery = (query) => {
-    this.setState({ currentBooks:[] })
-
     if (query === '' || query === undefined){
       return;
     } else {
+      this.getAllBooks()
       this.searchBooks(query)
     }
   }
 
-	render(){
-    this.state.currentBooks.sort(sortBy('title'))
+  render(){
+    this.state.books.sort(sortBy('title'))
 
-		return (
+    return (
       <div className="search-books">
         <div className="search-books-bar">
           <Link className="close-search" to="/">Close</Link>
           <div className="search-books-input-wrapper">
-           <Debounce time="400" handler="onChange">
+           <Debounce time="200" handler="onChange">
             <input 
               type="text" 
               placeholder="Search by title or author"
@@ -62,11 +72,10 @@ class SearchBooks extends Component{
           </Debounce>
           </div>
         </div>
-
         <div className="search-books-results">
           {this.state.returnAPI === 'ok' && (
             <ShelfList 
-             books={this.state.currentBooks} 
+             books={this.state.books} 
              upBooksToShelf={this.props.upBooksToShelf}/>
           )}
           {this.state.returnAPI === 'no' && (

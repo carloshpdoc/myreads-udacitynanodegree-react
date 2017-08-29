@@ -9,8 +9,8 @@ class Book extends Component {
 	}
 
   handleSelect = (e)=> {
-	e.preventDefault()
-	this.props.upBooksToShelf(this.props.book, e.target.value)
+	  e.preventDefault()
+	  this.props.upBooksToShelf(this.props.book, e.target.value)
   }
 
   render() {
@@ -21,9 +21,7 @@ class Book extends Component {
 	  <li>
 		<div className="book">
           <div className="book-top">
-           <div className="book-cover" data-tip data-for={book.id} style={{ 
-           	   width: 128, 
-           	   height: 193, 
+           <div className="book-cover" data-tip data-for={book.id} style={{
            	   backgroundImage: book.imageLinks ? `url(${book.imageLinks.thumbnail})` : "" }}>
            </div>
            <ReactTooltip id={book.id} type='info'>
@@ -37,7 +35,7 @@ class Book extends Component {
               </ul>
            </ReactTooltip>
             <div className='book-shelf-changer'>
-              <select defaultValue={book.shelf!==undefined?book.shelf:'move'} onChange={this.handleSelect}>
+              <select defaultValue={book.shelf?book.shelf:'move'} onChange={this.handleSelect}>
                 <option value="move" disabled>Move to...</option>
                 <option value="currentlyReading">Currently  Reading</option>
                 <option value="wantToRead">Want to Read</option>

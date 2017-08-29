@@ -1,6 +1,7 @@
 import React , { Component } from 'react'
 import Book from './Book'
 import PropTypes from 'prop-types'
+import keyIndex from 'react-key-index'
 
 class ShelfList extends Component {
 	static propTypes = {
@@ -10,10 +11,10 @@ class ShelfList extends Component {
 
 	render() {
 		const { books, upBooksToShelf } = this.props 
-		
+		let arr = keyIndex(books, 1)
 		return (
 			<ol className="books-grid">
-            {books.map(book => (
+            {arr.map(book => (
             	<Book 
             	  key={book.id} 
             	  book={book} 

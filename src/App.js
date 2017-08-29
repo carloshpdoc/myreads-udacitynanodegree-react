@@ -6,11 +6,14 @@ import ListBooks from './component/ListBooks'
 import './App.css'
 
 class BooksApp extends Component {
-  state = {
-   books :[]
+  constructor(props) {
+    super(props);
+    this.state = {
+      books: [],
+    };
   }
 
-  componentDidMount() {
+ componentDidMount() {
     BooksAPI.getAll().then((books) => {
       this.setState({ books: books})
     })
@@ -26,6 +29,7 @@ class BooksApp extends Component {
   }
 
   render() {
+
     return (
       <div className="app">
        <Route exact path="/" render={() => (
@@ -36,8 +40,8 @@ class BooksApp extends Component {
       )}/>
       <Route path="/search" render={ ({ history }) => (
          <SearchBooks 
-          upBooksToShelf={this.upBooksToShelf}
           books={this.state.books}
+          upBooksToShelf={this.upBooksToShelf}
          />
       )}/>
       </div>
